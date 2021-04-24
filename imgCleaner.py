@@ -15,6 +15,14 @@ def moyPixel(pixel):
         summ += val
     return summ/3
 
+if "--help" in argv or "-h" in argv:
+    print("imgCleaner.py [image path] [parameters]")
+    print("\t-e\tset black precision (eg: if set to 0, pixel should be [0, 0, 0] in RGB to be kept)")
+    print("\t-s\tname of the output file, if not specified no file will be saved")
+    print("--nshow\t\tdon't show the output")
+    print("--help\t-h\tshow this help")
+    exit(0)
+
 if len(argv)>1:
     filename = argv[1]
 else:
