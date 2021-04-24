@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import sqrt
 from sys import argv
+from os import system
 
 def RMSPixel(pixel):
     summ = 0
@@ -47,15 +48,24 @@ img= Image.open(filename)
 ar = np.array(img)
 newImg = np.array(ar)
 
+pixels = np.size(ar)/3
+print(pixels)
 nbpix = 0
+n = 0
 for i in range(np.size(ar, 0)):
     for j in range(np.size(ar, 1)):
-        rms = moyPixel(ar[i,j])
-        if rms>params["-e"]:
+        if n%30000==0:
+            system("clear")
+            print(str(int(n*100/pixels)) + "%")
+        moy = moyPixel(ar[i,j])
+        if moy>params["-e"]:
             newImg[i,j] = [255, 255, 255]
             nbpix+=1
+        n+=1
+system("clear")
+print("100%")
 
-print("Nombre de pixel modifié : {}".format(nbpix))
+print("Modified pixels : {}".format(nbpix))
 
 if not params["--nshow"]:
     plt.subplot(121)
