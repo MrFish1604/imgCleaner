@@ -2,7 +2,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 from math import sqrt
-from sys import argv
+from sys import argv, stdout
 from os import system
 
 def RMSPixel(pixel):
@@ -49,20 +49,20 @@ ar = np.array(img)
 newImg = np.array(ar)
 
 pixels = np.size(ar)/3
-print(pixels)
 nbpix = 0
 n = 0
 for i in range(np.size(ar, 0)):
     for j in range(np.size(ar, 1)):
         if n%30000==0:
-            system("clear")
-            print(str(int(n*100/pixels)) + "%")
+            stdout.write('\033[D \033[D\033[D \033[D\033[D \033[D')
+            stdout.write(str(int(n*100/pixels)) + "%")
+            stdout.flush()
         moy = moyPixel(ar[i,j])
         if moy>params["-e"]:
             newImg[i,j] = [255, 255, 255]
             nbpix+=1
         n+=1
-system("clear")
+stdout.write('\033[D \033[D\033[D \033[D\033[D \033[D\033[D \033[D')
 print("100%")
 
 print("Modified pixels : {}".format(nbpix))
