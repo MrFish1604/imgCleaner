@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.8)
+project( imgCleaner )
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( bin/imgCleaner src/imgCleaner.cpp )
+target_link_libraries( bin/imgCleaner ${OpenCV_LIBS} )
